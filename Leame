@@ -1,0 +1,19 @@
+# Explicación de `main.py`
+
+### 1. Uso del Patrón Estrategia (Strategy Pattern)
+El requerimiento más crítico era que *"las reglas para el cálculo de los precios son susceptibles de cambios de forma desacoplada"*. 
+No se están usando las condicionales `if/else` en la clase `Product`. En su lugar, se creó una interfaz `PricingStrategy` con implementaciones específicas (`NormalPricing`, `WeightPricing`, `SpecialPricing`). 
+Si mañana piden una nueva regla, se crea una clase nueva sin tocar el código existente.
+
+### 2. Encapsulamiento del Dominio
+El modelo de la tienda (`Store`, `Product`, `CartItem`) funciona de manera completamente independiente de la web. La API solo hace llamados a los métodos de los objetos. 
+Con esto se logran aislar las reglas de negocio de la tecnología del front (HTTP).
+
+### 3. Resolución de la Validación de Stock
+En la función `add_to_cart` dentro de la clase `Store`, la responsabilidad de verificar que la cantidad solicitada no supere el inventario (sumando lo que ya está en el carrito) 
+recae enteramente en el modelo del negocio. Esto garantiza la integridad de los datos antes de agregarlos al objeto `CartItem`.
+
+### 4. Conclusión sobre la utilidad de la POO
+Frente a la pregunta central de la actividad: **Sí, es sumamente útil la POO en el desarrollo web actual.** 
+Aunque la web funciona por peticiones sin estado (HTTP/JSON), mapear esas peticiones a un modelo de objetos en el backend permite mantener arquitecturas limpias, modulares y fáciles de testear. 
+La POO no compite con las tecnologías web, sino que organiza el caos en el backend.
